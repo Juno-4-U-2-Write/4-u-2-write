@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 import { FaSun } from "react-icons/fa";
 
 const Home = ({
-
   prompts,
   setPrompts,
   POTD,
@@ -15,56 +14,53 @@ const Home = ({
   currentDay,
   setCurrentDay,
   timeCheck,
-  handleToggle,
   darkMode,
-  setDarkMode,
+
+  handleToggle,
 }) => {
-	// !STATE ZONE
-	const { setTime } = useContext(TimerContext);
-	const [userSelection, setUserSelection] = useState("placeholder");
-	// *Navigate
-	const navigate = useNavigate();
+  // !STATE ZONE
+  const { setTime } = useContext(TimerContext);
+  const [userSelection, setUserSelection] = useState("placeholder");
+  // *Navigate
+  const navigate = useNavigate();
 
-	// !FUNCTION ZONE
-	const handleOnChange = (e) => {
-		setUserSelection(e.target.value);
-	};
+  // !FUNCTION ZONE
+  const handleOnChange = (e) => {
+    setUserSelection(e.target.value);
+  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (userSelection === "placeholder") {
+      toast.error("You must choose a writing time.");
+    } else {
+      navigate("/main");
+      timeCheck();
+    }
+  };
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		if (userSelection === "placeholder") {
-			toast.error("You must choose a writing time.");
-		} else {
-			navigate("/main");
-		}
-		timeCheck();
-	};
-
-	useEffect(() => {
-		setTime(userSelection);
-	}, [userSelection]);
-
-
-
+  useEffect(() => {
+    setTime(userSelection);
+  }, [userSelection]);
 
 
   return (
-    <div className={darkMode ? 'home darkMode' : 'home lightMode'}>
+    <div className={!darkMode ? "home lightMode" : "home darkMode"}>
       <div className="wrapper">
         <header className="home__header">
           <div className="home__imageContainer">
             <img src={logo} alt="The 4 U 2 Write logo." />
           </div>
 
-          <button className="myButton" onClick={handleToggle} darkMode={darkMode}>Toggle Light/Dark Theme</button>
+          <button className="myButton" onClick={handleToggle}>
+            <FaSun />
+          </button>
         </header>
 
         <main className="home__main">
           <h1>4 U 2 Write</h1>
           <form className="home__dropdownContainer" onSubmit={handleSubmit}>
             <select
-
               className="home__dropdown"
               name="writingTime"
               id="writingTime"
@@ -74,6 +70,7 @@ const Home = ({
               <option value="placeholder" disabled>
                 Choose your writing time
               </option>
+              {/* //TODO update this to 15 mins */}
               <option value={130}>15 minutes</option>
               <option value={1800}>30 minutes</option>
               <option value={2700}>45 minutes</option>
@@ -83,9 +80,8 @@ const Home = ({
             <label htmlFor="writingTime" className="sr-only">
               Choose your writing time
             </label>
-            <Link to="/main">
-              <button className="home__goButton button">Go</button>
-            </Link>
+
+            <button className="home__goButton lightBtn">Go</button>
           </form>
         </main>
 
@@ -97,13 +93,9 @@ const Home = ({
             exercitationem eveniet non iste!
           </p>
         </aside>
-        <footer className="home__footer">
-          created at juno with unending spite
-        </footer>
       </div>
     </div>
   );
-
 };
 
 export default Home;

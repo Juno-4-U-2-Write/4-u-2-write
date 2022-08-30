@@ -12,7 +12,7 @@ const Main = ({ POTD, prompts, setPrompts, darkMode }) => {
   const navigate = useNavigate();
   useEffect(() => {
     console.log(time, POTD);
-    if (!time || !POTD) {
+    if (!time || Number.isNaN(time) === true || !POTD) {
       console.log("please work");
       navigate("/");
     }

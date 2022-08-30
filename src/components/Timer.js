@@ -1,8 +1,8 @@
-import { FaClock } from 'react-icons/fa';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useState, useEffect } from "react";
 // import toast from "react-hot-toast";
 import TimerContext from "../contexts/TimerContext";
-
 const Timer = () => {
   // start a timer that is 15 mins long as soon as the component mount
   // put 5 mins interval in a state

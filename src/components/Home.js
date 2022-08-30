@@ -53,7 +53,7 @@ const Home = ({
           </div>
 
           <button className="myButton" onClick={handleToggle}>
-            <FaSun />
+            <FaSun className="darkModebtn"/>
           </button>
         </header>
 

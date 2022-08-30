@@ -55,35 +55,36 @@ function App() {
 
   // *on currentDay change -> change POTD
   useEffect(() => {
-    console.log("currentDay useEffect firing");
-    if (localStorage.storedCurrentDay !== currentDay) {
-      // run the new prompt fn
-      let spreadPrompts = [...prompts];
-      console.log(spreadPrompts);
 
-      // delete that entry from the array
-      spreadPrompts.shift();
-      setPrompts(spreadPrompts);
-      // set localstorage to current date time
-      localStorage.setItem("storedCurrentDay", currentDay);
-    } else {
-      console.log("you are on the same day");
-    }
+      console.log("currentDay useEffect firing");
+      if (localStorage.storedCurrentDay !== currentDay) {
+        // run the new prompt fn
+        let spreadPrompts = [...prompts];
+        console.log(spreadPrompts);
+  
+        // delete that entry from the array
+        spreadPrompts.shift();
+        setPrompts(spreadPrompts);
+        // set localstorage to current date time
+        localStorage.setItem("storedCurrentDay", currentDay);
+      } else {
+        console.log("you are on the same day");
+      }
   }, [currentDay]);
 
   // !FUNCTION ZONE
 
   // *Get Prompts from Firebase - async fn
-  const getFirebasePrompts = async () => {
-    // get firebase going
-    const database = getDatabase(firebase);
-    const dbRef = ref(database);
-    // here's the await, make it return the data
-    const snapshot = await get(dbRef);
-    // .val to clean it up
-    const data = snapshot.val();
-    return data;
-  };
+  // const getFirebasePrompts = async () => {
+  //   // get firebase going
+  //   const database = getDatabase(firebase);
+  //   const dbRef = ref(database);
+  //   // here's the await, make it return the data
+  //   const snapshot = await get(dbRef);
+  //   // .val to clean it up
+  //   const data = snapshot.val();
+  //   return data;
+  // };
 
   // *Update Prompt
   // *localstorage time listener
@@ -96,6 +97,7 @@ function App() {
       setPOTD(promptTopic);
     }
   };
+
   const [darkMode, setDarkMode] = useState(true);
 
   const handleToggle = () => {
@@ -139,9 +141,9 @@ function App() {
             />
           }
         />
-        <Route path="*" element={<Error />} />
+        <Route path="*" element={<Error darkMode={darkMode}/>} />
       </Routes>
-      <Footer />
+      <Footer darkMode={darkMode}/>
     </div>
   );
 

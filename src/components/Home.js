@@ -4,14 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import TimerContext from "../contexts/TimerContext";
 import toast from "react-hot-toast";
-import { FaSun } from "react-icons/fa";
+import { FaSun, FaMoon } from "react-icons/fa";
 
-const Home = ({
-  timeCheck,
-  darkMode,
-
-  handleToggle,
-}) => {
+const Home = ({ timeCheck, darkMode, handleToggle }) => {
   // !STATE ZONE
   const { setTime } = useContext(TimerContext);
   const [userSelection, setUserSelection] = useState("placeholder");
@@ -25,10 +20,13 @@ const Home = ({
   }, [userSelection]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // !FUNCTION ZONE
+  //   *dropdown selector fn
   const handleOnChange = (e) => {
     setUserSelection(e.target.value);
   };
 
+  // *error handling for navigating to writing page (main) w/o selecting a time
+  // *timeCheck (sets new prompt daily) runs in here cuz it couldn't work on pageload
   const handleSubmit = (e) => {
     e.preventDefault();
     if (userSelection === "placeholder") {
@@ -51,7 +49,7 @@ const Home = ({
             className="lightBtn home__lightModeBtn"
             onClick={handleToggle}
           >
-            <FaSun />
+            {darkMode ? <FaSun /> : <FaMoon />}
           </button>
         </header>
 
@@ -59,7 +57,9 @@ const Home = ({
           <h1>4 U 2 Write</h1>
           <form className="home__dropdownContainer" onSubmit={handleSubmit}>
             <select
-              className="home__dropdown"
+              className={
+                !darkMode ? "home__dropdown lightModeBtn" : "home__dropdown"
+              }
               name="writingTime"
               id="writingTime"
               onChange={handleOnChange}
@@ -68,7 +68,7 @@ const Home = ({
               <option value="placeholder" disabled>
                 Choose your writing time
               </option>
-              <option value={35}>15 minutes</option>
+              <option value={900}>15 minutes</option>
               <option value={1800}>30 minutes</option>
               <option value={2700}>45 minutes</option>
               <option value={3600}>60 minutes</option>
@@ -77,7 +77,11 @@ const Home = ({
               Choose your writing time
             </label>
 
-            <button className="home__goButton lightBtn">Go</button>
+            <button
+              className={!darkMode ? "lightBtn lightModeBtn" : "lightBtn"}
+            >
+              Go
+            </button>
           </form>
         </main>
 

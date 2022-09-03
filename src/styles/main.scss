@@ -1,5 +1,6 @@
 .Main {
   margin: 0 auto;
+  padding-top: 100px;
   header {
     text-align: center;
   }
@@ -11,10 +12,14 @@
   font-family: "Lato", sans-serif;
   font-weight: bold;
   // *Back Button
-  &__backButton {
+  &__nav {
     position: absolute;
     right: 0;
-    top: 15px;
+    top: 5px;
+    right: 5px;
+    a {
+      margin-left: 3px;
+    }
   }
   // *Timer
   &__timer {
@@ -39,13 +44,14 @@
   }
 
   // *Prompt Area
-  //   &__prompts {
-  //     width: 60vw;
-  //     padding: 30px;
-  //     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
-  //       rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-  //     border: 1px solid $grey;
-  //   }
+  &__prompts {
+    width: 60vw;
+    padding: 30px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+      rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    border: 1px solid $grey;
+    border-radius: 5px;
+  }
 
   // *Writing Area
   &__form {
@@ -63,6 +69,21 @@
     width: 60vw;
     resize: none;
     margin: 50px 0 30px;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    padding: 20px;
+    color: $dark;
+    border-radius: 5px;
+    font-family: $bodyFont;
+    letter-spacing: 0.5px;
+
+    &::selection {
+      background: $lightBlue;
+      color: #fff;
+    }
+
+    &:focus {
+      outline: 2px solid $lightBlue;
+    }
   }
 
   &__instructions {

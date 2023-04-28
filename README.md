@@ -52,13 +52,16 @@ Contributions are welcome! If you would like to enhance the app or fix any issue
 4. Push to the branch: `git push origin feature/your-feature-name`
 5. Submit a pull request.
 
+<!-- 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+-->
 
 ## Acknowledgements
-
+<!--
 - [OpenAI](https://openai.com/) for providing the underlying language model.
+-->
 - [Firebase](https://firebase.google.com/) for optional data storage capabilities.
 - API providers for writing prompts, song/playlist suggestions, and error handling.
 - Developers and contributors of libraries and frameworks used in this project.
